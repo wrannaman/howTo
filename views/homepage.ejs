@@ -1,0 +1,207 @@
+<link type="text/css" href='http://sailsjs.org/styles/fonts.css' rel='stylesheet'/>
+<style>
+/* Styles included inline since you'll probably be deleting this page anyway */
+html,body{text-align:left;font-size:1em}html,body,img,form,textarea,input,fieldset,div,p,div,ul,li,ol,dl,dt,dd,h1,h2,h3,h4,h5,h6,pre,code{margin:0;padding:0}ul,li{list-style:none}img{display:block}a img{border:0}a{text-decoration:none;font-weight:normal;font-family:inherit}*:active,*:focus{outline:0;-moz-outline-style:none}h1,h2,h3,h4,h5,h6{font-weight:normal}div.clear{clear:both}.clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;line-height:0;visibility:hidden}body{font-family:"Open Sans",Arial,sans-serif;font-weight:300;}.top-bar {width: 100%; background-color: #e4f0f1; padding: 15px 0;}.top-bar .container img {float: left;}.top-bar .container ul {float: right; padding-top: 25px;}.top-bar .container li {float: left; width: 125px; text-align: center; font-size: 15px; color:#000; font-weight: 600;}.top-bar .container a li:hover {color: #118798; -webkit-transition:color 200ms; -moz-transition:color 200ms; -o-transition:color 200ms;transition:color 200ms;}.container{width: 80%; max-width: 1200px; margin: auto;}div.header {-webkit-transition: 6s; -moz-transition: 6s; -o-transition: 6s;transition: 6s; background: rgba(4, 36, 41, 0.89) url(http://sailsjs.org/images/img_sailsShadow.png) no-repeat 42% bottom; padding: 100px 0 65px;}.header h1#main-title{color: #fff; font-weight: 300; font-size: 2.5em;}.header h3{color: #b1eef7; font-style: italic; font-weight: 300;}.header h3 code{font-style: normal!important; background-color: rgba(255,255,255,0.5); font-weight: 300; color:#0e6471; margin: 0px 5px;}div.main.container{padding: 50px 0;}h1 {color: #118798; font-weight: 300;}code {font-size: inherit; font-family: 'Consolas', 'Monaco', monospace; padding:4px 5px 1px; background-color: #f3f5f7}a{color: #118798; font-weight: 300; text-decoration: underline;}a:hover {color: #0e6471; -webkit-transition:color 200ms; -moz-transition:color 200ms; -o-transition:color 200ms;transition:color 200ms;}p{line-height: 1.5em;}blockquote{background-color: #e4f0f1; padding: 25px; line-height: 1.5em; margin: 15px 0;}blockquote span{font-weight: 600; padding-right: 5px;}ul.getting-started{padding: 25px 75px 25px 0; width: 70%; float: left; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}ul.getting-started li{padding: 25px 0;}ul.getting-started li h3 {padding-bottom: 10px; font-size: 25px; font-weight: 300;}.sprite{background:url(http://sailsjs.org/images/newapp.sprite.png) no-repeat; position: absolute; left: 0; top:0;}.getting-started .sprite{margin-left:10px;padding-left:60px;height:42px;width:0; float: left;}.getting-started .one{background-position:0 0}.getting-started .two{background-position:0 -42px}.getting-started .three{background-position:0 -83px}div.step {position: relative; padding-left: 70px; opacity: 0.9;}div.step:hover{ opacity: 1;}div.links {float: left; width: 30%; max-width: 325px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; background-color: #f3f5f7; border: 1px solid #ebebeb; padding: 25px 45px 35px;}div.links h3 {color: #727272; text-align: center; font-size: 28px; font-weight: 300;}div.links h4 {color: #727272; font-size: 17px; font-weight: 600; padding: 15px 0 10px;}div.links .link-list a {text-decoration: none; font-weight: 400;}div.links .link-list a li {padding: 0px 0px 5px 10px;}div.default-page{min-width: 1200px;}.pocket{display:none;}
+</style>
+<style>
+.tutorial-wrap {
+  width: 70%;
+  margin: 0 auto;
+  background: #EFEFEF;
+  padding: 2%;
+}
+
+h1 {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+h2 {
+  color: #2F8692;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+
+}
+p {
+  color: #404040;
+  padding: 3%;
+}
+
+</style>
+<div class="default-page">
+
+  <div class="tutorial-wrap">
+    <h1>Provisioning an amazon ec2 linux box for deploying a node js app in a production environment. </h1>
+
+    <h2> Intro </h2>
+    <p>At some point, you’re going to be finished working locally and need to figure out how to get your code  onto a server so that it can be accessed by the outside world. One common way to do this is by using amazon’s ec2 to create a virtual server in the cloud to host your site or app. The motivations for this are simple. I wanted to create a complete reference for myself to spin up a node server in minutes. The documentation for how to do spin up a new virtual server from scratch for the most current version of node is scattered across different articles and it was difficult to find a location where all the instructions were in one place. I will be using a mac for this tutorial so the non instance command line references will be different if you’re not on a mac. </p>
+
+    <h2> Creating an ec2 instance  </h2>
+    <p> There is already plenty of documentation regarding how to spin up a new server on the amazon website. If you have trouble starting  a new server please see <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html">this aws article</a> </p>
+    <p>What you need to have to continue: <br>
+    The ability to ssh into the server (i.e. you have successfully created a new instance and security group ( perhaps even a new key if you dont already have one )
+    </p>
+
+    <p>Just for clarification, please select this AMI when creating a new instance</p>
+    <img src="/images/1.png" style="max-width: 100%;">
+
+      <h2> SSH into the server   </h2>
+    <p>Now the interesting part begins, but first a little something I started doing to make logging into different instance much easier. It creates a namespace so you can type
+
+    </p>
+    <code>
+      $ ssh demo
+    </code>
+    <p>
+      into the terminal and ssh into the server. This is much easier than specifying the user and key path each time you want to ssh in. On a mac, do, </p>
+    <code>
+      $ nano ~/.ssh/config
+    </code>
+    <p>One you’re in the config file, create a name for this server. I’ll call it demo for now. You can find the Hostname in the ec2 console to the right of the highlighted item below</p>
+    <img src="/images/2.png" style="max-width: 60%;">
+    <p>The identityFile is the path to the .pem file for your security group. refer to the article above if you do not have one. The user is ec2-user for these boxes.</p>
+    <code>
+      Host demo <br>
+      Hostname XX.XX.XX.XX<br>
+      IdentityFile /path/to/ssh.pem<br>
+      User ec2-user<br>
+    </code>
+    <p>Great! Now we can just ssh test into the server and we’re in. </p>
+
+    <h2> Update the linux box </h2>
+    <code>
+      $ sudo yum update
+    </code>
+    <p>it's always a good idea and is recommended to upgrade your linux instance to the latest code available so that any security fixes or new modules will be installed. after entering the command , you will get a prompt asking if it is okay to install and you can enter yes to continue the update. </p>
+    <img src="/images/3.png" style="max-width: 60%;">
+
+    <h2> Installing node.  </h2>
+
+    <p>We’re going to install node by grabbing the latest tar and then unzipping it. The unzip and install process will be in the same command. We are going to install node under the local user so that it can be run without the sudo command. There is some debate as to whether or not this ultimately matters but for the purpose of this demo we will only run node as the current user, not as sudo. To run the user as sudo, please see <a href="http://stackoverflow.com/questions/4976658/on-ec2-sudo-node-command-not-found-but-node-without-sudo-is-ok">these stack overflow answers. </a></p>
+    <p>to grab the latest tar of node, do </p>
+    <code>
+      $ wget https://nodejs.org/dist/v5.5.0/node-v5.5.0-linux-x64.tar.gz
+    </code>
+    <p>
+      You should see a progress indicator. When the command finishes, just do
+    </p>
+    <code>
+      $ ls
+    </code>
+    <p>to see the contents of the directory and you should see something like the following</p>
+    <img src="/images/4.png" style="max-width: 60%;">
+    <p>the red is our new node tar. We need to unzip this so that we can install node.</p>
+    <code>
+      $ cd /usr/local
+    </code>
+    <p>now we are in the user’s local folder, which is where we will install and run node from. This will enable us to run node without using sudo. To see why this is a good idea see <a href="https://increaseyourgeek.wordpress.com/2010/08/18/install-node-js-without-using-sudo/">this article </a></p>
+    <p>To unzip the file and install node, do </p>
+    <code>
+      $ sudo tar --strip-components 1 -xzf /home/ec2-user/node-v5.5.0-linux-x64.tar.gz
+    </code>
+    <p>node should now be installed, which we can check with  </p>
+    <code>
+      $ node -v
+    </code>
+    <p>success should look like</p>
+    <img src="/images/5.png" style="max-width: 60%;">
+    <p>Since npm comes bundled with node, we’re actually ready to start building a node app!</p>
+
+    <h2> Installing Git </h2>
+    <p>Installing git is as easy as </p>
+    <code>
+      $ sudo yum install git
+    </code>
+    <p>Its very helpful to set up deploy keys in git to pull new code onto the server without logging in to git each time. For more information on setting up deploy keys, see <a href="https://developer.github.com/guides/managing-deploy-keys/">this article </a></p>
+
+
+    <h2> Deploying a real (small)  app </h2>
+
+
+    <p>We’re going to take this a step further and deploy a small sample app to our server so we can do one last configuration setup which will allow us to have a server running on localhost  ( in the server ) on port 1337 and receive requests from port 80. To reiterate, the outside world will hit the normal web address (i.e. without specifying a port thus defaulting to port 80 ) but internall via the servers ip tables, we will redirect those requests to port 1337. This is a useful pattern  to allow us to run node on our server without a sudo user and still allow the outside world to access the server via port 80. </p>
+    <p>Because we are just going to use a very basic app, we can go ahead and set up the app on the server itself. </p>
+    <code>
+    $ /home/ec2-user <br>
+      $ npm i -g sails <br>
+      $ sails new demo <br>
+      $ cd demo <br>
+      $ sails lift <br>
+    </code>
+    <p>what we are doing here is creating a basic node app ( using sails.js ) and turning the node server on at port 1337. to make sure this is working okay you should now be able to go to your public ip at port 1337 and see the following.</p>
+    <img src="/images/6.png" style="max-width: 60%;">
+
+    <p>if this does not work it may be because you do not have a security rule in aws that allows access to port 1337. Go to the ec2 security groups and click on the inbound tab at the bottom of the page. </p>
+    <img src="/images/7.png" style="max-width: 60%;">
+
+    <p>we are going to create a custom TCP rule to allow access on port 1337. click on edit, click on custom tcp rule as the type, type TCP as the protocol and 1337 as the port range. The source should be anywhere. </p>
+    <p>After a few minutes, try to access port 1337 by your ip address. You should see the above ‘brand new app’ header. </p>
+
+
+    <h2>port 80</h2>
+    <p>So far we have installed git, node and now have a real node app running on our virtual machine which is now accessible to the outside world. There is one problem ; the port number must be specified to access the server. What if we want to point ourawesomedomain.com to this ip address? This would not be allowed because CNAME records do not allow you to specify ports. One way to handle this is to redirect the inbound traffic from port 80 to port 1337 internally. We can do this by modifying the iptables </p>
+    <code>
+      /* serve requests to port 80 from port 1337*/ <br>
+      $ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to 1337
+    </code>
+    <p>Now lets go back to the ip address and try to access our server without specifying the port (i.e. using port 80). you should see the same ‘ a brand new app’ header on the page but this time without specifying a port on the end of your url. </p>
+
+    <h2>Final touches. </h2>
+    <p>
+      you may have noticed that if you want to exit the server and keep the node app running, there is currently no way to do that. While it is possible to run node as a background process, it is not advisable for production usage. What if the server crashes? If it is run as a background process, you would need a way to handle restarting node. Fortunately npm has several packages to help with this. One such package is called forever. <a href="https://github.com/foreverjs/forever">Their documentation </a> is great, so I will just include installation and basic usage here.
+    </p>
+    <code>
+      $ npm i -g forever
+    </code>
+    <p>This will install forever as a global package ‘-g’ just like we did for sails. now we need to add what is called a foreverignore, which is much like a gitignore but for the forever process. With sails, each time an asset is changed, a hidden folder called the .tmp folder gets updated and if it is not excluded by the foreverignore file, your server will just endlessly restart itself.</p>
+
+
+
+    <code>
+      $ touch .foreverignore <br>
+      $ nano .foreverignore <br>
+
+      <br><br>
+      /* In the .foreverignore file */ <br>
+      **/.tmp/** <br>
+      **/views/** <br>
+      **/.git/** <br>
+    </code>
+    <p>Now we can use forever safely to run our node process ‘forever’. Basically if the server shuts down or seg faults, or stops for any reason, forever has our back and will immediately restart the server!</p>
+
+
+
+
+    <code>
+      $ forever start app.js
+    </code>
+
+    <p>should you ever need to inspect what is going on in the server logs while a forever process is handling your app, you can do </p>
+
+
+    <code>
+      $ forever list
+    </code>
+
+    <p>to see where the logfile is and then </p>
+
+
+    <code>
+      $ sudo tail -f path/to/logfile.log
+    </code>
+
+    <p>to tail the log file and view its output</p>
+
+    <h2> conclusion </h2>
+
+    <p>After many hours of looking through poor documentation, this guide will serve me to be able to spin up a new production server for any node app in less than 10 minutes. While this is a great start to go from an ‘empty’ linux box to a production ready node app, there are a few ways in which the environment could be optimized or configured for a more robust dev ops environment. </p>
+    <p>Nginx is one such tool that could be very useful depending on your need for running multiple apps on a single server. since it is not possible to point CNAME records at ip addresses with port numbers, you can use nginx to allow multiple apps with different domain names ( or subdomains, or even certain routes! ) to be run on the same server. For example, lets say you have a wordpress blog on your app at /blog. You could use nginx to route requests to yourapp.com/blog to the wordpress instance and allow all other routes to be handled by your app’s routing. Or, you could have your personal website on one port, and several projects running on different ports  and still be able to have separate domain names for your website and each project. </p>
+    <p>Ultimately this is just scratching the surface of dev ops and deploying node apps in a production environment but sometimes you just need a good place to start. </p>
+
+  </div>
+
+
+
+</div>
